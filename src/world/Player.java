@@ -1,3 +1,4 @@
+package world;
 public class Player {
 	private int startRow; // player's starting row position 
 	private int startCol; // player's starting column position

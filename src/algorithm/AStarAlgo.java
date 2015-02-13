@@ -1,3 +1,6 @@
+package algorithm;
+import world.Player;
+
 
 public class AStarAlgo {
 	public AStarAlgo() {

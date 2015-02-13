@@ -1,0 +1,5 @@
+cat .git/info/exclude
+bin/
+.project
+.classpath
+.settings

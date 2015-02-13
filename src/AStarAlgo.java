@@ -4,4 +4,9 @@ public class AStarAlgo {
 		
 	}
 
+	public void start(String[][] maze1, Player player1) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

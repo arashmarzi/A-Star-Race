@@ -11,6 +11,9 @@ public class Simulation {
 				{"e", "e", "e", "e", "e", "e", "e"},
 		};
 		
+		Player player1 = new Player(0,0,"player1");
+		AStarAlgo aStarAlgo = new AStarAlgo();
+		aStarAlgo.start(maze1, player1);
 		
 		
 	}

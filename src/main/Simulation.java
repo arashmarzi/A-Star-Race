@@ -8,19 +8,9 @@ import world.Tile;
 
 
 public class Simulation {
-	public static void main(String[] args) {
-	/*	String [][] maze1 = { 
-				{"e", "e", "e", "o", "e", "e", "e"},
-				{"e", "o", "e", "e", "o", "e", "e"},
-				{"e", "o", "e", "e", "o", "e", "e"},
-				{"e", "o", "o", "h", "o", "e", "e"},
-				{"e", "e", "o", "e", "e", "e", "e"},
-				{"e", "e", "o", "o", "o", "e", "e"},
-				{"e", "e", "e", "e", "e", "e", "e"},
-		};*/
-		
-		@SuppressWarnings("unused")
+	public static void main(String[] args) {		
 		Maze maze1 = createMaze1();
+		System.out.println(maze1.toString());
 		
 		//Player player1 = new Player(0,0,"player1");
 		//AStarAlgo aStarAlgo = new AStarAlgo();
@@ -31,47 +21,214 @@ public class Simulation {
 	public static Maze createMaze1(){
 		int width = 7;
 		int length = 7;
-		List<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>(7);
+		ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>(width);
+		ArrayList<Tile> row1;
+		ArrayList<Tile> row2;
+		ArrayList<Tile> row3;
+		ArrayList<Tile> row4;
+		ArrayList<Tile> row5;
+		ArrayList<Tile> row6;
+		ArrayList<Tile> row7;
+		
 		Maze maze1 = new Maze(tiles);
 		
 		// initialize tiles, without giving each tile content
 		for(int i = 0; i < width; i++) {
-			tiles.add(new ArrayList<Tile>(7));
+			tiles.add(new ArrayList<Tile>(length));
 			for(int j = 0; j < length; j++) {
 				tiles.get(i).add(new Tile(new Coordinate(i,j)));
-				System.out.println("tile: " + tiles.get(i).get(j).getCoord());
 			}	
 		}
 		
-		
-		
-	/*	for(int i = 0; i < row1.size(); i++) {
+		row1 = tiles.get(0);
+		for(int i = 0; i < row1.size(); i++) {
 			switch(i){
 			case 0:
+				row1.get(i).setType("e");
 				break;
 			case 1:
+				row1.get(i).setType("e");
 				break;
 			case 2:
+				row1.get(i).setType("e");
 				break;
 			case 3:
+				row1.get(i).setType("o");
 				break;
 			case 4:
+				row1.get(i).setType("e");
 				break;
 			case 5:
+				row1.get(i).setType("e");
 				break;
 			case 6:
+				row1.get(i).setType("e");
 				break;
 			}
 		}
 		
-		ArrayList<Tile> row2 = new ArrayList<>(7);
-		ArrayList<Tile> row3 = new ArrayList<>(7);
-		ArrayList<Tile> row4 = new ArrayList<>(7);
-		ArrayList<Tile> row5 = new ArrayList<>(7);
-		ArrayList<Tile> row6 = new ArrayList<>(7);
-		ArrayList<Tile> row7 = new ArrayList<>(7);
+		row2 = tiles.get(1);
+		for(int i = 0; i < row2.size(); i++) {
+			switch(i){
+			case 0:
+				row2.get(i).setType("e");
+				break;
+			case 1:
+				row2.get(i).setType("o");
+				break;
+			case 2:
+				row2.get(i).setType("e");
+				break;
+			case 3:
+				row2.get(i).setType("e");
+				break;
+			case 4:
+				row2.get(i).setType("o");
+				break;
+			case 5:
+				row2.get(i).setType("e");
+				break;
+			case 6:
+				row2.get(i).setType("e");
+				break;
+			}
+		}
 		
-		*/
+		row3 = tiles.get(2);
+		for(int i = 0; i < row3.size(); i++) {
+			switch(i){
+			case 0:
+				row3.get(i).setType("e");
+				break;
+			case 1:
+				row3.get(i).setType("o");
+				break;
+			case 2:
+				row3.get(i).setType("e");
+				break;
+			case 3:
+				row3.get(i).setType("e");
+				break;
+			case 4:
+				row3.get(i).setType("o");
+				break;
+			case 5:
+				row3.get(i).setType("e");
+				break;
+			case 6:
+				row3.get(i).setType("e");
+				break;
+			}
+		}
+		
+		row4 = tiles.get(3);
+		for(int i = 0; i < row4.size(); i++) {
+			switch(i){
+			case 0:
+				row4.get(i).setType("e");
+				break;
+			case 1:
+				row4.get(i).setType("o");
+				break;
+			case 2:
+				row4.get(i).setType("o");
+				break;
+			case 3:
+				row4.get(i).setType("h");
+				break;
+			case 4:
+				row4.get(i).setType("o");
+				break;
+			case 5:
+				row4.get(i).setType("e");
+				break;
+			case 6:
+				row4.get(i).setType("e");
+				break;
+			}
+		}
+		
+		row5 = tiles.get(4);
+		for(int i = 0; i < row5.size(); i++) {
+			switch(i){
+			case 0:
+				row5.get(i).setType("e");
+				break;
+			case 1:
+				row5.get(i).setType("e");
+				break;
+			case 2:
+				row5.get(i).setType("o");
+				break;
+			case 3:
+				row5.get(i).setType("e");
+				break;
+			case 4:
+				row5.get(i).setType("e");
+				break;
+			case 5:
+				row5.get(i).setType("e");
+				break;
+			case 6:
+				row5.get(i).setType("e");
+				break;
+			}
+		}
+		
+		row6 = tiles.get(5);
+		for(int i = 0; i < row6.size(); i++) {
+			switch(i){
+			case 0:
+				row6.get(i).setType("e");
+				break;
+			case 1:
+				row6.get(i).setType("e");
+				break;
+			case 2:
+				row6.get(i).setType("o");
+				break;
+			case 3:
+				row6.get(i).setType("o");
+				break;
+			case 4:
+				row6.get(i).setType("o");
+				break;
+			case 5:
+				row6.get(i).setType("e");
+				break;
+			case 6:
+				row6.get(i).setType("e");
+				break;
+			}
+		}
+		
+		row7 = tiles.get(6);
+		for(int i = 0; i < row7.size(); i++) {
+			switch(i){
+			case 0:
+				row7.get(i).setType("e");
+				break;
+			case 1:
+				row7.get(i).setType("e");
+				break;
+			case 2:
+				row7.get(i).setType("e");
+				break;
+			case 3:
+				row7.get(i).setType("e");
+				break;
+			case 4:
+				row7.get(i).setType("e");
+				break;
+			case 5:
+				row7.get(i).setType("e");
+				break;
+			case 6:
+				row7.get(i).setType("e");
+				break;
+			}
+		}
+		
 		return maze1;
 		
 	}

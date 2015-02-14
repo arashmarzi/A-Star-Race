@@ -17,7 +17,15 @@ public class Maze {
 
 	@Override
 	public String toString() {
-		return "Maze [tiles=" + tiles + "]";
+		String tilesStr = new String();
+		
+		for(int i = 0; i < tiles.size(); i++) {
+			for (int j = 0; j < tiles.get(i).size(); j++){
+				tilesStr += "[" + tiles.get(i).get(j).getType() + "]";
+			}
+			tilesStr += "\n";
+		}
+		return tilesStr;
 	}
 
 }

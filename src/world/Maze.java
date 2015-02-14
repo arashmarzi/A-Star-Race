@@ -1,16 +1,17 @@
 package world;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Maze {
 
-	private ArrayList<ArrayList<Tile>> tiles;
+	private List<ArrayList<Tile>> tiles;
 
-	public Maze() {
-		tiles = new ArrayList<ArrayList<Tile>>();
+	public Maze(List<ArrayList<Tile>> tiles2) {
+		this.tiles = tiles2;
 	}
 
-	public ArrayList<ArrayList<Tile>> getTiles() {
+	public List<ArrayList<Tile>> getTiles() {
 		return tiles;
 	}
 

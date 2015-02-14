@@ -8,9 +8,13 @@ public class Tile {
 	private Tile right;
 	private String type;
 
-	public Tile(int x, int y, String type) {
-		this.coord = new Coordinate(x, y);
+	public Tile(Coordinate coord, String type) {
+		this.coord = new Coordinate(coord.getX(), coord.getY());
 		this.type = type;
+	}
+	
+	public Tile(Coordinate coord) {
+		this.coord = new Coordinate(coord.getX(), coord.getY());
 	}
 
 	public Coordinate getCoord() {
@@ -51,6 +55,10 @@ public class Tile {
 
 	public String getType() {
 		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override

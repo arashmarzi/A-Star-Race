@@ -7,14 +7,26 @@ public class Tile {
 	private Tile left;
 	private Tile right;
 	private String type;
+	private int id;
+	private int hValue;
+	private int gValue;
+	private int fValue;
 
-	public Tile(Coordinate coord, String type) {
+	public Tile(Coordinate coord, String type, int id) {
 		this.coord = new Coordinate(coord.getX(), coord.getY());
 		this.type = type;
+		this.id = id;
+		this.hValue = 0;
+		this.gValue = 0;
+		this.fValue = 0;
 	}
 	
-	public Tile(Coordinate coord) {
+	public Tile(Coordinate coord, int id) {
 		this.coord = new Coordinate(coord.getX(), coord.getY());
+		this.id = id;
+		this.hValue = 0;
+		this.gValue = 0;
+		this.fValue = 0;
 	}
 
 	public Coordinate getCoord() {
@@ -61,9 +73,13 @@ public class Tile {
 		this.type = type;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	@Override
 	public String toString() {
-		return "[coord=" + coord + ", type=" + type + "]";
+		return "[coord=" + coord + ", type=" + type + ", id=" + id + "]";
 	}
 
 }

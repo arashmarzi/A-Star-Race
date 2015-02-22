@@ -2,23 +2,33 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import algorithm.AStarAlgo;
 import world.Coordinate;
 import world.Maze;
+import world.Player;
 import world.Tile;
 
 
 public class Simulation {
 	public static void main(String[] args) {		
 		Maze maze1 = createMaze1();
-		System.out.println(maze1.toString());
+		System.out.println("MAZE:\n" + maze1.toString());
 		
-		//Player player1 = new Player(0,0,"player1");
-		//AStarAlgo aStarAlgo = new AStarAlgo();
-		//aStarAlgo.start(maze1, player1);	
+		/*for(int i = 0; i < maze1.getTiles().size(); i++) {
+			for(int j = 0; j < maze1.getTiles().get(i).size(); j++) {
+				System.out.println(maze1.getTiles().get(i).get(j).getId());
+			}
+		}*/
 		
+		Player player1 = new Player(0,0,"player1");
+		System.out.println("created player: " + player1.toString());
+		
+		AStarAlgo aStarAlgo = new AStarAlgo();
+		aStarAlgo.start(maze1, player1, maze1.getTiles().get(player1.getStartX()).get(player1.getStartY()), maze1.getTiles().get(3).get(3));	
 	}
 	
 	public static Maze createMaze1(){
+		int id = 0;
 		int width = 7;
 		int length = 7;
 		ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>(width);
@@ -36,7 +46,8 @@ public class Simulation {
 		for(int i = 0; i < width; i++) {
 			tiles.add(new ArrayList<Tile>(length));
 			for(int j = 0; j < length; j++) {
-				tiles.get(i).add(new Tile(new Coordinate(i,j)));
+				tiles.get(i).add(new Tile(new Coordinate(i,j), id));
+				id++;
 			}	
 		}
 		

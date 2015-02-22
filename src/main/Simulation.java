@@ -24,7 +24,7 @@ public class Simulation {
 		System.out.println("created player: " + player1.toString());
 		
 		AStarAlgo aStarAlgo = new AStarAlgo();
-		aStarAlgo.start(maze1, player1, maze1.getTiles().get(player1.getStartX()).get(player1.getStartY()), maze1.getTiles().get(3).get(3));	
+		aStarAlgo.start(maze1, player1, maze1.getTiles().get(player1.getStartRow()).get(player1.getStartCol()), maze1.getTiles().get(3).get(3));	
 	}
 	
 	public static Maze createMaze1(){

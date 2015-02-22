@@ -13,11 +13,11 @@ public class Player {
 		this.score = 0;
 	}
 
-	public int getStartX() {
+	public int getStartRow() {
 		return startRow;
 	}
 
-	public int getStartY() {
+	public int getStartCol() {
 		return startCol;
 	}
 

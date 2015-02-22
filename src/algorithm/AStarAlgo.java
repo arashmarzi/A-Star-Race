@@ -47,12 +47,17 @@ public class AStarAlgo {
 		System.out.println("calculating h, g, f values\n");
 		for (int i = 0; i < tiles.size(); i++) {
 			for (int j = 0; j < tiles.get(i).size(); j++) {
-				System.out.println("tile " + tiles.get(i).get(j).getId());
-				if (tiles.get(i).get(j).getType() != home) {
-					calcHeuristic(tiles.get(i).get(j), goal);
+				Tile currentTile = tiles.get(i).get(j);
+				
+				System.out.println("tile " + currentTile.getId());
+				if (currentTile.getType() == empty) {
+					calcHeuristic(currentTile, goal);
+				} else if (currentTile.getType() == home) {
+					System.out.println(currentTile.getCoord() + " is the goal");
 				} else {
-					System.out.println(tiles.get(i).get(j).getCoord() + " is the goal");
+					System.out.println(currentTile.getCoord() + " is an obstacle");
 				}
+				
 				System.out.println();
 			}
 		}
@@ -66,13 +71,13 @@ public class AStarAlgo {
 		int fValue = 0;
 		int numCollisions = 0;
 
-		// if goal is to left of current tile on x-axis
+		// if goal is to left of current tile
 		if (mDistance[0] > 0) {
 			// move along the row of current tile to find collisions
 			for (int i = 1; i <= Math.abs(mDistance[0]); i++) {
-				// ensure tile checking has not gone out of bounds on x-axis
-				if (tile.getCoord().getX() - i >= 0) {
-					Tile checkTile = tiles.get(tile.getCoord().getX() - i).get(tile.getCoord().getY());
+				// ensure tile checking has not gone out of bounds
+				if (tile.getCoord().getCol() - i >= 0) {
+					Tile checkTile = tiles.get(tile.getCoord().getRow()).get(tile.getCoord().getCol() - i);
 					System.out.println("checking tile " + checkTile.getCoord() + " on left");
 					if (checkTile.getType() == obstacle) {
 						numCollisions++;
@@ -82,12 +87,12 @@ public class AStarAlgo {
 				}
 
 			}
-		} else { // goal is to right of current tile on x-axis
+		} else { // goal is to right of current tile
 			// move along the row of current tile to find collisions
 			for (int i = 1; i <= Math.abs(mDistance[0]); i++) {
-				// ensure tile checking has not gone out of bounds on x-axis
-				if (tile.getCoord().getX() + i < tiles.get(tile.getCoord().getX()).size()) {
-					Tile checkTile = tiles.get(tile.getCoord().getX() + i).get(tile.getCoord().getY());
+				// ensure tile checking has not gone out of bounds
+				if (tile.getCoord().getCol() + i < tiles.get(tile.getCoord().getRow()).size()) {
+					Tile checkTile = tiles.get(tile.getCoord().getRow()).get(tile.getCoord().getCol() + i);
 					System.out.println("checking tile " + checkTile.getCoord() + " on right");
 					if (checkTile.getType() == obstacle) {
 						numCollisions++;
@@ -107,8 +112,8 @@ public class AStarAlgo {
 
 	private int[] calcManhattanDistance(Tile a, Tile b) {		
 		int[] mDistance = new int[2];
-		mDistance[0] = a.getCoord().getX() - b.getCoord().getX();
-		mDistance[1] = a.getCoord().getY() - b.getCoord().getY();
+		mDistance[0] = a.getCoord().getCol() - b.getCoord().getCol(); 
+		mDistance[1] = a.getCoord().getRow() - b.getCoord().getRow();
 		
 		System.out.println("calculated Man Dist");
 		

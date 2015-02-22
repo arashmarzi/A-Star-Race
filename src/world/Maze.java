@@ -21,7 +21,7 @@ public class Maze {
 		
 		for(int i = 0; i < tiles.size(); i++) {
 			for (int j = 0; j < tiles.get(i).size(); j++){
-				tilesStr += "[" + tiles.get(i).get(j).getType() + "]";
+				tilesStr += "[  " + tiles.get(i).get(j).getType() + " " + tiles.get(i).get(j).getId() + "  ]";
 			}
 			tilesStr += "\n";
 		}

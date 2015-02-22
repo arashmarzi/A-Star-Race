@@ -13,7 +13,7 @@ public class Tile {
 	private int fValue;
 
 	public Tile(Coordinate coord, String type, int id) {
-		this.coord = new Coordinate(coord.getX(), coord.getY());
+		this.coord = new Coordinate(coord.getRow(), coord.getCol());
 		this.type = type;
 		this.id = id;
 		this.hValue = 0;
@@ -22,7 +22,7 @@ public class Tile {
 	}
 	
 	public Tile(Coordinate coord, int id) {
-		this.coord = new Coordinate(coord.getX(), coord.getY());
+		this.coord = new Coordinate(coord.getRow(), coord.getCol());
 		this.id = id;
 		this.hValue = 0;
 		this.gValue = 0;

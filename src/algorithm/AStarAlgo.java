@@ -104,8 +104,38 @@ public class AStarAlgo {
 			}
 		}
 
-		// if goal is to right of current tile on y-axis
+		// if goal is below current tile
+		if (mDistance[1] < 0) {
+			// move along the row of current tile to find collisions
+			for (int i = 1; i <= Math.abs(mDistance[1]); i++) {
+				// ensure tile checking has not gone out of bounds
+				if (tile.getCoord().getRow() + i < tiles.size()) {
+					Tile checkTile = tiles.get(tile.getCoord().getRow() + i).get(tile.getCoord().getCol() + Math.abs(mDistance[0]));
+					System.out.println("checking tile " + checkTile.getCoord() + " below");
+					if (checkTile.getType() == obstacle) {
+						numCollisions++;
+					}
+				} else {
+					System.out.println("No more tiles to check, out of bounds");
+				}
 
+			}
+		} else { // goal is above current tile
+			// move along the col of current tile to find collisions
+			for (int i = 1; i <= Math.abs(mDistance[1]); i++) {
+				// ensure tile checking has not gone out of bounds
+				if (tile.getCoord().getRow() - i >= 0) {
+					Tile checkTile = tiles.get(tile.getCoord().getRow() - i).get(tile.getCoord().getCol() + Math.abs(mDistance[0]));
+					System.out.println("checking tile " + checkTile.getCoord() + " above");
+					if (checkTile.getType() == obstacle) {
+						numCollisions++;
+					}
+				} else {
+					System.out.println("No more tiles to check, out of bounds");
+				}
+
+			}
+		}
 		//return vertSquares + horzSquares + numObstacles;
 
 	}

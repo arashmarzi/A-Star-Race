@@ -14,6 +14,7 @@ public class Simulation {
 		Maze maze1 = createMaze1();
 		System.out.println("MAZE:\n" + maze1.toString());
 		
+		
 		/*for(int i = 0; i < maze1.getTiles().size(); i++) {
 			for(int j = 0; j < maze1.getTiles().get(i).size(); j++) {
 				System.out.println(maze1.getTiles().get(i).get(j).getId());

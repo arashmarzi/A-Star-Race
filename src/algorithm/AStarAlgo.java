@@ -20,25 +20,56 @@ public class AStarAlgo {
 
 	private List<ArrayList<Tile>> tiles;
 
+	private boolean isGoalFound;
+	
 	public AStarAlgo() {
 		this.openSet = new ArrayList<Tile>();
 		this.closeSet = new ArrayList<Tile>();
+		this.isGoalFound = false;
 	}
 
 	// correct inputs later
 	public void start(Maze maze1, Player player1, Tile start, Tile goal) {
-		System.out.println("Starting Algorithm to get from " + start.getCoord() + " to " + goal.getCoord());
+		System.out.println("Starting Algorithm to get from " + start.getCoord() + " to " + goal.getCoord() + "\n");
 		tiles = maze1.getTiles();
 		
 		openSet.add(start);
-		Tile current = getMinFValue();
-		System.out.println(current.getId() + " has lowest F value " + current.getFValue());
 		
+		while(!isGoalFound) {
+			Tile current = getMinFValue();
+			
+			// there are no more members of the openSet to examine
+			if(current == null) {
+				break;
+			}
+			
+			System.out.println(current.getId() + " has lowest F value " + current.getFValue());
 		
+			// if the current tile is the goal
+			if(current.getType() == home) {
+				isGoalFound = true;
+				
+				// reconstruct path and return
+			}
+			
+			// get frontier of neighbours of current tile
+			Tile[] frontier = getFrontier(current);
+			
+			
+			for(int i = 0; i < frontier.length; i++) {
+				if(frontier[i] != null && !closeSetContains(frontier[i])) {
+					System.out.println(frontier[i]);
+				}
+				
+			}
+			
+			
+		}
 		
 		// calculate h, g, and f function values for each tile
-		System.out.println("calculating h, g, f values\n");
-		for (int i = 0; i < tiles.size(); i++) {
+		//System.out.println("calculating h, g, f values\n");
+		
+	/*	for (int i = 0; i < tiles.size(); i++) {
 			for (int j = 0; j < tiles.get(i).size(); j++) {
 				Tile currentTile = tiles.get(i).get(j);
 				
@@ -53,7 +84,7 @@ public class AStarAlgo {
 				
 				System.out.println();
 			}
-		}
+		}*/
 
 	}
 
@@ -209,32 +240,45 @@ public class AStarAlgo {
 	
 	private Tile getMinFValue() {
 		Tile lowest = null;
-		int indexLowest = 0;
+		int indexLowest = -1;
 		
 		if(openSet.size() > 0) {
 			lowest = openSet.get(0);
-		}
-		
-		for(int i = 1; i < openSet.size(); i++) {
-			if(lowest.getFValue() > openSet.get(i).getFValue()) {
-				lowest = openSet.get(i);
-				indexLowest = i;
-			} else if(lowest.getFValue() == openSet.get(i).getFValue()) {
-				if(lowest.getHValue() > openSet.get(i).getHValue()) {
+			indexLowest = 0;
+			
+			
+			for(int i = 1; i < openSet.size(); i++) {
+				if(lowest.getFValue() > openSet.get(i).getFValue()) {
 					lowest = openSet.get(i);
 					indexLowest = i;
-				} else if(lowest.getHValue() == openSet.get(i).getHValue()){
-					if(lowest.getGValue() > openSet.get(i).getGValue()) {
+				} else if(lowest.getFValue() == openSet.get(i).getFValue()) {
+					if(lowest.getHValue() > openSet.get(i).getHValue()) {
 						lowest = openSet.get(i);
 						indexLowest = i;
+					} else if(lowest.getHValue() == openSet.get(i).getHValue()){
+						if(lowest.getGValue() > openSet.get(i).getGValue()) {
+							lowest = openSet.get(i);
+							indexLowest = i;
+						}
 					}
 				}
 			}
+			
+			closeSet.add(openSet.remove(indexLowest));
 		}
-		
-		closeSet.add(openSet.remove(indexLowest));
-		
 		return lowest;
 	}
 
+	private boolean closeSetContains(Tile tile) {
+		boolean doesCloseSetContain = false;
+		
+		for(int i = 0; i < closeSet.size(); i++) {
+			if(closeSet.get(i).getId() == tile.getId()) {
+				doesCloseSetContain = true;
+				break;
+			}
+		}
+		
+		return doesCloseSetContain;
+	}
 }

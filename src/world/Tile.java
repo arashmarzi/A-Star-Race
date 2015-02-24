@@ -7,6 +7,7 @@ public class Tile {
 	private int hValue;
 	private int gValue;
 	private int fValue;
+	private Tile parent;
 
 	public Tile(Coordinate coord, String type, int id) {
 		this.coord = new Coordinate(coord.getRow(), coord.getCol());
@@ -71,6 +72,14 @@ public class Tile {
 
 	public void setFValue(int fValue) {
 		this.fValue = fValue;
+	}
+	
+	public Tile getParent() {
+		return parent;
+	}
+	
+	public void setParent(Tile parent) {
+		this.parent = parent;
 	}
 
 	@Override

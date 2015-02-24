@@ -11,38 +11,31 @@ import world.Player;
 import world.Tile;
 
 public class AStarAlgo {
-	private int vertSquares;
-	private int horzSquares;
-	private int numObstacles;
-
 	private final String obstacle = "o";
 	private final String empty = "e";
 	private final String home = "h";
 
-	private Map<Integer, Tile> openSet;
+	private ArrayList<Tile> openSet;
 	private ArrayList<Tile> closeSet;
-	private Map<Integer, Tile> cameFrom;
-	private Integer cameFromInt;
 
 	private List<ArrayList<Tile>> tiles;
 
 	public AStarAlgo() {
-		this.vertSquares = 0;
-		this.horzSquares = 0;
-		this.numObstacles = 0;
-
-		this.openSet = new HashMap<Integer, Tile>();
+		this.openSet = new ArrayList<Tile>();
 		this.closeSet = new ArrayList<Tile>();
-		this.cameFrom = new HashMap<Integer, Tile>();
-
-		this.cameFromInt = 0;
 	}
 
 	// correct inputs later
 	public void start(Maze maze1, Player player1, Tile start, Tile goal) {
 		System.out.println("Starting Algorithm to get from " + start.getCoord() + " to " + goal.getCoord());
 		tiles = maze1.getTiles();
-
+		
+		openSet.add(start);
+		Tile current = getMinFValue();
+		System.out.println(current.getId() + " has lowest F value " + current.getFValue());
+		
+		
+		
 		// calculate h, g, and f function values for each tile
 		System.out.println("calculating h, g, f values\n");
 		for (int i = 0; i < tiles.size(); i++) {
@@ -153,89 +146,12 @@ public class AStarAlgo {
 		}
 		
 		hValue = numCollisions + Math.abs(mDistance[0]) + Math.abs(mDistance[1]);
+		gValue = tile.getParent().getGValue() + 1;
+		fValue = hValue + gValue;
+		
 		tile.setHValue(hValue);
 		tile.setGValue(gValue);
-		tile.setFValue(gValue + hValue); 
-		
-		
-		
-		
-		/*
-		
-		
-		// if goal is to left of current tile
-		if (mDistance[0] > 0) {
-			// move along the row of current tile to find collisions
-			for (int i = 1; i <= Math.abs(mDistance[0]); i++) {
-				// ensure tile checking has not gone out of bounds
-				if (tile.getCoord().getCol() - i >= 0) {
-					Tile checkTileCol = tiles.get(tile.getRow()).get(tile.getCol() - i);
-					
-					System.out.println("checking tile " + checkTileCol.getCoord() + " on left");
-					
-					if (checkTileCol.getType() == obstacle) {
-						numCollisions++;
-					}
-					
-					// when checking last tile, find collisions down col
-					if(i == Math.abs(mDistance[0])) {
-						
-					}
-				} else {
-					System.out.println("No more tiles to check, out of bounds");
-				}
-
-			}
-		} else { // goal is to right of current tile
-			// move along the row of current tile to find collisions
-			for (int i = 1; i <= Math.abs(mDistance[0]); i++) {
-				// ensure tile checking has not gone out of bounds
-				if (tile.getCoord().getCol() + i < tiles.get(tile.getCoord().getRow()).size()) {
-					Tile checkTile = tiles.get(tile.getCoord().getRow()).get(tile.getCoord().getCol() + i);
-					System.out.println("checking tile " + checkTile.getCoord() + " on right");
-					if (checkTile.getType() == obstacle) {
-						numCollisions++;
-					}
-				} else {
-					System.out.println("No more tiles to check, out of bounds");
-				}
-
-			}
-		}
-
-		// if goal is below current tile
-		if (mDistance[1] < 0) {
-			// move along the row of current tile to find collisions
-			for (int i = 1; i <= Math.abs(mDistance[1]); i++) {
-				// ensure tile checking has not gone out of bounds
-				if (tile.getCoord().getRow() + i < tiles.size()) {
-					Tile checkTile = tiles.get(tile.getCoord().getRow() + i).get(tile.getCoord().getCol() + Math.abs(mDistance[0]));
-					System.out.println("checking tile " + checkTile.getCoord() + " below");
-					if (checkTile.getType() == obstacle) {
-						numCollisions++;
-					}
-				} else {
-					System.out.println("No more tiles to check, out of bounds");
-				}
-
-			}
-		} else { // goal is above current tile
-			// move along the col of current tile to find collisions
-			for (int i = 1; i <= Math.abs(mDistance[1]); i++) {
-				// ensure tile checking has not gone out of bounds
-				if (tile.getCoord().getRow() - i >= 0) {
-					Tile checkTile = tiles.get(tile.getCoord().getRow() - i).get(tile.getCoord().getCol() + Math.abs(mDistance[0]));
-					System.out.println("checking tile " + checkTile.getCoord() + " above");
-					if (checkTile.getType() == obstacle) {
-						numCollisions++;
-					}
-				} else {
-					System.out.println("No more tiles to check, out of bounds");
-				}
-
-			}
-		}*/
-		//return vertSquares + horzSquares + numObstacles;
+		tile.setFValue(fValue); 
 
 	}
 
@@ -255,6 +171,70 @@ public class AStarAlgo {
 			tile = tiles.get(row).get(col); 
 		}
 		return tile;
+	}
+	
+	private Tile[] getFrontier(Tile tile) {
+		Tile[] frontier = new Tile[4];
+		
+		// get north neighbour
+		if(tile.getRow() - 1 >= 0) {
+			frontier[0] = getTile(tile.getRow() - 1, tile.getCol());
+		} else {
+			frontier[0] = null;
+		}
+		
+		// get east neighbour
+		if(tile.getCol() + 1 < tiles.get(tile.getRow()).size()) {
+			frontier[1] = getTile(tile.getRow(), tile.getCol() + 1);
+		} else {
+			frontier[1] = null;
+		}
+		
+		//  get south neighbour
+		if(tile.getRow() + 1 < tiles.size()) {
+			frontier[2] = getTile(tile.getRow() + 1, tile.getCol());
+		} else {
+			frontier[2] = null;
+		}
+		
+		// get west neighbour
+		if(tile.getCol() - 1 >= 0) {
+			frontier[3] = getTile(tile.getRow(), tile.getCol() - 1);
+		} else {
+			frontier[3] = null;
+		}
+		
+		return frontier;
+	}
+	
+	private Tile getMinFValue() {
+		Tile lowest = null;
+		int indexLowest = 0;
+		
+		if(openSet.size() > 0) {
+			lowest = openSet.get(0);
+		}
+		
+		for(int i = 1; i < openSet.size(); i++) {
+			if(lowest.getFValue() > openSet.get(i).getFValue()) {
+				lowest = openSet.get(i);
+				indexLowest = i;
+			} else if(lowest.getFValue() == openSet.get(i).getFValue()) {
+				if(lowest.getHValue() > openSet.get(i).getHValue()) {
+					lowest = openSet.get(i);
+					indexLowest = i;
+				} else if(lowest.getHValue() == openSet.get(i).getHValue()){
+					if(lowest.getGValue() > openSet.get(i).getGValue()) {
+						lowest = openSet.get(i);
+						indexLowest = i;
+					}
+				}
+			}
+		}
+		
+		closeSet.add(openSet.remove(indexLowest));
+		
+		return lowest;
 	}
 
 }

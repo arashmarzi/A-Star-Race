@@ -2,10 +2,6 @@ package world;
 
 public class Tile {
 	private Coordinate coord;
-	private Tile up;
-	private Tile down;
-	private Tile left;
-	private Tile right;
 	private String type;
 	private int id;
 	private int hValue;
@@ -33,38 +29,6 @@ public class Tile {
 		return coord;
 	}
 
-	public Tile getUp() {
-		return up;
-	}
-
-	public Tile getDown() {
-		return down;
-	}
-
-	public Tile getLeft() {
-		return left;
-	}
-
-	public Tile getRight() {
-		return right;
-	}
-	
-	public void setUp(Tile up) {
-		this.up = up;
-	}
-
-	public void setDown(Tile down) {
-		this.down = down;
-	}
-
-	public void setLeft(Tile left) {
-		this.left = left;
-	}
-
-	public void setRight(Tile right) {
-		this.right = right;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -77,6 +41,38 @@ public class Tile {
 		return id;
 	}
 	
+	public int getRow() {
+		return coord.getRow();
+	}
+	
+	public int getCol() {
+		return coord.getCol();
+	}
+	
+	public int getHValue() {
+		return hValue;
+	}
+
+	public void setHValue(int hValue) {
+		this.hValue = hValue;
+	}
+
+	public int getGValue() {
+		return gValue;
+	}
+
+	public void setGValue(int gValue) {
+		this.gValue = gValue;
+	}
+
+	public int getFValue() {
+		return fValue;
+	}
+
+	public void setFValue(int fValue) {
+		this.fValue = fValue;
+	}
+
 	@Override
 	public String toString() {
 		return "[coord=" + coord + ", type=" + type + ", id=" + id + "]";

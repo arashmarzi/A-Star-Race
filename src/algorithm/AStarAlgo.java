@@ -55,15 +55,33 @@ public class AStarAlgo {
 			// get frontier of neighbours of current tile
 			Tile[] frontier = getFrontier(current);
 			
-			
 			for(int i = 0; i < frontier.length; i++) {
 				if(frontier[i] != null && !closeSetContains(frontier[i])) {
 					System.out.println(frontier[i]);
+					
+
+					if(frontier[i].getType() == empty) {
+						// calculate neighbour's fValue
+						calcHeuristic(frontier[i], goal);
+					} else if (frontier[i].getType() == home) {
+						System.out.println(frontier[i].getCoord() + " is the goal");
+						// reconstruct path
+						isGoalFound = true;
+						// NEED TO IMPROVE TO BREAK OUT OF LOOP
+					} else if (frontier[i].getType() == obstacle) {
+						// do not need to calculate anything
+					}
 				}
 				
 			}
 			
+			// if path to neighbour is shorter or neighbour is not in openSet
+			Tile neighbour = getNearestFrontierTile(frontier);
+			neighbour.setParent(current);
 			
+			if(!openSetContains(neighbour)) {
+				openSet.add(neighbour);
+			}
 		}
 		
 		// calculate h, g, and f function values for each tile
@@ -77,7 +95,7 @@ public class AStarAlgo {
 				if (currentTile.getType() == empty) {
 					calcHeuristic(currentTile, goal);
 				} else if (currentTile.getType() == home) {
-					System.out.println(currentTile.getCoord() + " is the goal");
+					
 				} else {
 					System.out.println(currentTile.getCoord() + " is an obstacle");
 				}
@@ -280,5 +298,42 @@ public class AStarAlgo {
 		}
 		
 		return doesCloseSetContain;
+	}
+	
+	private boolean openSetContains(Tile tile) {
+		boolean doesOpenSetContain = false;
+		
+		for(int i = 0; i < openSet.size(); i++) {
+			if(closeSet.get(i).getId() == tile.getId()) {
+				doesOpenSetContain = true;
+				break;
+			}
+		}
+		
+		return doesOpenSetContain;
+	}
+	
+	private Tile getNearestFrontierTile(Tile[] frontier) {
+		Tile lowest = null;
+		if(frontier.length > 0) {
+			lowest = frontier[0];
+			for(int i = 1; i < frontier.length; i++) {
+				if(frontier[i] != null){
+					if(lowest.getFValue() > frontier[i].getFValue()) {
+						lowest = frontier[i];
+					} else if(lowest.getFValue() == frontier[i].getFValue()) {
+						if(lowest.getHValue() > frontier[i].getHValue()) {
+							lowest = frontier[i];
+						} else if(lowest.getHValue() == frontier[i].getHValue()){
+							if(lowest.getGValue() > frontier[i].getGValue()) {
+								lowest = frontier[i];
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return lowest;
 	}
 }

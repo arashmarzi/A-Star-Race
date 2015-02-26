@@ -33,12 +33,18 @@ public class Simulation {
 		player1.setPathLength(aStarAlgo1.getPathLength());
 		System.out.println(player1);
 	
+		// recreate maze, removes parent tiles and heuristic values
+		maze1 = createMaze1();
+		
 		// start algorithm for player2
 		AStarAlgo aStarAlgo2 = new AStarAlgo();
 		aStarAlgo2.start(maze1, player2, maze1.getTiles().get(player2.getStartRow()).get(player2.getStartCol()), maze1.getTiles().get(3).get(3));
 		player2.setPath(aStarAlgo2.getPath());
 		player2.setPathLength(aStarAlgo2.getPathLength());
 		System.out.println(player2);
+		
+		// recreate map, removes parent tiles and heuristic values
+		maze1 = createMaze1();
 		
 		// start algorithm for player2
 		AStarAlgo aStarAlgo3 = new AStarAlgo();
@@ -47,12 +53,18 @@ public class Simulation {
 		player3.setPathLength(aStarAlgo3.getPathLength());
 		System.out.println(player3);
 		
+		// recreate map, removes parent tiles and heuristic values
+		maze1 = createMaze1();
+		
 		// start algorithm for player4
 		AStarAlgo aStarAlgo4 = new AStarAlgo();
 		aStarAlgo4.start(maze1, player4, maze1.getTiles().get(player4.getStartRow()).get(player4.getStartCol()), maze1.getTiles().get(3).get(3));
 		player4.setPath(aStarAlgo4.getPath());
 		player4.setPathLength(aStarAlgo4.getPathLength());
 		System.out.println(player4);
+		
+		// recreate map, removes parent tiles and heuristic values
+		maze1 = createMaze1();
 	}
 	
 	public static Maze createMaze1(){

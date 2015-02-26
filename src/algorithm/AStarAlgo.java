@@ -32,7 +32,7 @@ public class AStarAlgo {
 	}
 
 	// correct inputs later
-	public void start(Maze maze1, Player player1, Tile start, Tile goal) {
+	public void start(Maze maze1, Player player, Tile start, Tile goal) {
 		System.out.println("Starting Algorithm to get from " + start.getCoord() + " to " + goal.getCoord() + "\n");
 		tiles = maze1.getTiles();
 		

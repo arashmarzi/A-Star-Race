@@ -21,11 +21,17 @@ public class Simulation {
 			}
 		}*/
 		
-		Player player1 = new Player(0,0,"player1");
+		Player player1 = new Player(0, 0,"player1");
 		System.out.println("created player: " + player1.toString());
 		
 		AStarAlgo aStarAlgo = new AStarAlgo();
-		aStarAlgo.start(maze1, player1, maze1.getTiles().get(player1.getStartRow()).get(player1.getStartCol()), maze1.getTiles().get(3).get(3));	
+		aStarAlgo.start(maze1, player1, maze1.getTiles().get(player1.getStartRow()).get(player1.getStartCol()), maze1.getTiles().get(3).get(3));
+		
+		player1.setPath(aStarAlgo.getPath());
+		player1.setPathLength(aStarAlgo.getPathLength());
+		
+		System.out.println(player1);
+	
 	}
 	
 	public static Maze createMaze1(){

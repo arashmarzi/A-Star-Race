@@ -14,24 +14,45 @@ public class Simulation {
 		Maze maze1 = createMaze1();
 		System.out.println("MAZE:\n" + maze1.toString());
 		
-		
-		/*for(int i = 0; i < maze1.getTiles().size(); i++) {
-			for(int j = 0; j < maze1.getTiles().get(i).size(); j++) {
-				System.out.println(maze1.getTiles().get(i).get(j).getId());
-			}
-		}*/
-		
-		Player player1 = new Player(0, 0,"player1");
+		Player player1 = new Player(0, 0, "player1");
 		System.out.println("created player: " + player1.toString());
 		
-		AStarAlgo aStarAlgo = new AStarAlgo();
-		aStarAlgo.start(maze1, player1, maze1.getTiles().get(player1.getStartRow()).get(player1.getStartCol()), maze1.getTiles().get(3).get(3));
+		Player player2 = new Player(0, 6, "player2");
+		System.out.println("created player: " + player2.toString());
 		
-		player1.setPath(aStarAlgo.getPath());
-		player1.setPathLength(aStarAlgo.getPathLength());
+		Player player3 = new Player(6, 0, "player3");
+		System.out.println("created player: " + player3.toString());
 		
+		Player player4 = new Player(6, 6, "player4");
+		System.out.println("created player: " + player4.toString());
+		
+		// start algorithm for player1
+		AStarAlgo aStarAlgo1 = new AStarAlgo();
+		aStarAlgo1.start(maze1, player1, maze1.getTiles().get(player1.getStartRow()).get(player1.getStartCol()), maze1.getTiles().get(3).get(3));
+		player1.setPath(aStarAlgo1.getPath());
+		player1.setPathLength(aStarAlgo1.getPathLength());
 		System.out.println(player1);
 	
+		// start algorithm for player2
+		AStarAlgo aStarAlgo2 = new AStarAlgo();
+		aStarAlgo2.start(maze1, player2, maze1.getTiles().get(player2.getStartRow()).get(player2.getStartCol()), maze1.getTiles().get(3).get(3));
+		player2.setPath(aStarAlgo2.getPath());
+		player2.setPathLength(aStarAlgo2.getPathLength());
+		System.out.println(player2);
+		
+		// start algorithm for player2
+		AStarAlgo aStarAlgo3 = new AStarAlgo();
+		aStarAlgo3.start(maze1, player3, maze1.getTiles().get(player3.getStartRow()).get(player3.getStartCol()), maze1.getTiles().get(3).get(3));
+		player3.setPath(aStarAlgo3.getPath());
+		player3.setPathLength(aStarAlgo3.getPathLength());
+		System.out.println(player3);
+		
+		// start algorithm for player4
+		AStarAlgo aStarAlgo4 = new AStarAlgo();
+		aStarAlgo4.start(maze1, player4, maze1.getTiles().get(player4.getStartRow()).get(player4.getStartCol()), maze1.getTiles().get(3).get(3));
+		player4.setPath(aStarAlgo4.getPath());
+		player4.setPathLength(aStarAlgo4.getPathLength());
+		System.out.println(player4);
 	}
 	
 	public static Maze createMaze1(){

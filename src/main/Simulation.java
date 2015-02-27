@@ -20,14 +20,14 @@ public class Simulation {
 		Maze maze7 = createMaze2();
 		Maze maze8 = createMaze2();
 		
-		Player player1 = new Player(0, 0, "player1");
-		Player player2 = new Player(0, 6, "player2");
-		Player player3 = new Player(6, 0, "player3");
-		Player player4 = new Player(6, 6, "player4");
-		Player player5 = new Player(0, 0, "player5");
-		Player player6 = new Player(0, 8, "player6");
-		Player player7 = new Player(8, 0, "player7");
-		Player player8 = new Player(8, 8, "player8");
+		Player player1 = new Player(0, 0, "Stephan Hawking");
+		Player player2 = new Player(0, 6, "George W. Bush Jr.");
+		Player player3 = new Player(6, 0, "Willy Wonka");
+		Player player4 = new Player(6, 6, "Grease Lightening");
+		Player player5 = new Player(0, 0, "LOLCATZ");
+		Player player6 = new Player(0, 8, "H1N1 Virus");
+		Player player7 = new Player(8, 0, "Ghost of Hamlet's father");
+		Player player8 = new Player(8, 8, "Swarm of locusts");
 		
 		AStarAlgo aStarAlgo1 = new AStarAlgo();
 		AStarAlgo aStarAlgo2 = new AStarAlgo();

@@ -33,7 +33,7 @@ public class AStarAlgo {
 
 	// correct inputs later
 	public void start(Maze maze1, Player player, Tile start, Tile goal) {
-		System.out.println("Player " + player.getName() + " to get from " + start.getCoord() + " to " + goal.getCoord());
+		System.out.println(player.getName() + " to get from " + start.getCoord() + " to " + goal.getCoord());
 		tiles = maze1.getTiles();
 		
 		openSet.add(start);

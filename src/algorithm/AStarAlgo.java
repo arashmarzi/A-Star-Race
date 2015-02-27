@@ -33,7 +33,7 @@ public class AStarAlgo {
 
 	// correct inputs later
 	public void start(Maze maze1, Player player, Tile start, Tile goal) {
-		System.out.println("Starting Algorithm to get from " + start.getCoord() + " to " + goal.getCoord() + "\n");
+		System.out.println("Player " + player.getName() + " to get from " + start.getCoord() + " to " + goal.getCoord());
 		tiles = maze1.getTiles();
 		
 		openSet.add(start);
@@ -47,7 +47,7 @@ public class AStarAlgo {
 				break;
 			}
 			
-			System.out.println(current.getId() + " has lowest F value " + current.getFValue());
+		//	System.out.println(current.getId() + " has lowest F value " + current.getFValue());
 		
 			// if the current tile is the goal
 			if(current.getType() == home) {
@@ -59,7 +59,7 @@ public class AStarAlgo {
 			
 			// loop through frontier and calculate heuristic for each tile
 			for(int i = 0; i < frontier.size(); i++) {
-				System.out.println(frontier.get(i));
+	//			System.out.println(frontier.get(i));
 				
 				// associate frontier tile to parent tile
 				frontier.get(i).setParent(current);
@@ -74,7 +74,7 @@ public class AStarAlgo {
 					// add neighbour to openSet
 					openSet.add(frontier.get(i));
 				} else if (frontier.get(i).getType() == home) {
-					System.out.println(frontier.get(i).getCoord() + " is the goal");
+//					System.out.println(frontier.get(i).getCoord() + " is the goal");
 
 					// set parent of neighbour
 					frontier.get(i).setParent(current); 
@@ -113,11 +113,11 @@ public class AStarAlgo {
 				if(tile.getCol() - i >= 0) {
 					Tile checkTile = getTile(tile.getRow(), tile.getCol() - i);
 					
-					System.out.println("checking tile " + checkTile.getId() + " on left");
+	//				System.out.println("checking tile " + checkTile.getId() + " on left");
 					
 					// check to see if collision occurred with obstacle
 					if (checkTile.getType() == obstacle) {	
-						System.out.println("Obstacle was found at " + checkTile.getId());
+	//					System.out.println("Obstacle was found at " + checkTile.getId());
 						
 						numCollisions++;
 					}
@@ -133,11 +133,11 @@ public class AStarAlgo {
 				if(tile.getCol() - i < tiles.get(tile.getRow()).size()) {
 					Tile checkTile = getTile(tile.getRow(), tile.getCol() - i);
 					
-					System.out.println("checking tile " + checkTile.getId() + " on right");
+		//			System.out.println("checking tile " + checkTile.getId() + " on right");
 					
 					// check to see if collision occurred with obstacle
 					if (checkTile.getType() == obstacle) {	
-						System.out.println("Obstacle was found at " + checkTile.getId());
+//						System.out.println("Obstacle was found at " + checkTile.getId());
 						
 						numCollisions++;
 					}
@@ -153,14 +153,14 @@ public class AStarAlgo {
 				if(tile.getRow() - i < tiles.size()) {
 					Tile checkTile = getTile(tile.getRow() - i, tile.getCol() - mDistance[0]);
 					
-					System.out.println("checking tile " + checkTile.getId() + " below");
+	//				System.out.println("checking tile " + checkTile.getId() + " below");
 					
 					if (checkTile.getType() == obstacle) {	
-						System.out.println("Obstacle was found at " + checkTile.getId());
+		//				System.out.println("Obstacle was found at " + checkTile.getId());
 						
 						numCollisions++;
 					} else if (checkTile.getType() == home) {
-						System.out.println("Home reached");
+	//					System.out.println("Home reached");
 					}
 				}
 			}
@@ -174,14 +174,14 @@ public class AStarAlgo {
 				if(tile.getRow() -i >= 0) {
 					Tile checkTile = getTile(tile.getRow() - i, tile.getCol() - mDistance[0]);
 					
-					System.out.println("checking tile " + checkTile.getId() + " above");
+		//			System.out.println("checking tile " + checkTile.getId() + " above");
 					
 					if (checkTile.getType() == obstacle) {	
-						System.out.println("Obstacle was found at " + checkTile.getId());
+			//			System.out.println("Obstacle was found at " + checkTile.getId());
 						
 						numCollisions++;
 					} else if (checkTile.getType() == home) {
-						System.out.println("Home reached");
+	//					System.out.println("Home reached");
 					}
 				}
 			}
@@ -203,7 +203,7 @@ public class AStarAlgo {
 		mDistance[0] = a.getCoord().getCol() - b.getCoord().getCol(); // distance between columns
 		mDistance[1] = a.getCoord().getRow() - b.getCoord().getRow(); // distance between rows
 		
-		System.out.println("calculated Man Dist: " + mDistance[0] + " " + mDistance[1]);
+		//System.out.println("calculated Man Dist: " + mDistance[0] + " " + mDistance[1]);
 		
 		return mDistance;
 	}
@@ -350,6 +350,7 @@ public class AStarAlgo {
 		while(current != null) {
 			// add current's id to reversedPath
 			reversedPath.add(String.valueOf(current.getId()));
+		//	System.out.println(String.valueOf(current.getId()));
 			
 			// iterate to current's parent tile
 			current = current.getParent();
